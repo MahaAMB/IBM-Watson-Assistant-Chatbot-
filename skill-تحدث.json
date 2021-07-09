@@ -1,0 +1,474 @@
+{
+  "intents": [
+    {
+      "intent": "استعلام",
+      "examples": [
+        {
+          "text": "ما خدماتك"
+        },
+        {
+          "text": "ما هي خدماتك؟"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "الأساليب_الذكية",
+      "examples": [
+        {
+          "text": "ماذا تقصد بالأساليب الذكية؟"
+        },
+        {
+          "text": "من هم الأساليب الذكية"
+        },
+        {
+          "text": "من هم الأساليب الذكية؟"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "ترحيب",
+      "examples": [
+        {
+          "text": "أهلا"
+        },
+        {
+          "text": "السلام"
+        },
+        {
+          "text": "السلام عليكم"
+        },
+        {
+          "text": "اهلا"
+        },
+        {
+          "text": "اهلين"
+        },
+        {
+          "text": "سلام"
+        },
+        {
+          "text": "مرحبا"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "لوحة_التحكم",
+      "examples": [
+        {
+          "text": "شرح مبسط عن لوحة التحكم"
+        },
+        {
+          "text": "لوحة التحكم"
+        },
+        {
+          "text": "ما وظيفة لوحة التحكم"
+        },
+        {
+          "text": "ما وظيفة لوحة التحكم؟"
+        }
+      ],
+      "description": ""
+    },
+    {
+      "intent": "نعم_لا",
+      "examples": [
+        {
+          "text": "لا"
+        },
+        {
+          "text": "نعم"
+        }
+      ],
+      "description": ""
+    }
+  ],
+  "entities": [
+    {
+      "entity": "استعلام",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "ما هي خدماتك؟",
+          "synonyms": [
+            "الخدمات",
+            "خدمات",
+            "خدماتك",
+            "ما هي خدماتك"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "ترحيب",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "اهلا",
+          "synonyms": [
+            "أهلا",
+            "السلام",
+            "السلام عليكم",
+            "اهلين",
+            "سلام",
+            "مرحبا",
+            "مرحبًا"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "خدمات",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "شرح مبسط عن لوحة التحكم",
+          "synonyms": [
+            "شرح مبسط عن لوحه التحكم"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "نبذة عن الأساليب الذكية",
+          "synonyms": [
+            "نبذة عن الاساليب الذكية",
+            "نبذة عن الاساليب الذكيه",
+            "نبذه عن الأساليب الذكية",
+            "نبذه عن الأساليب الذكيه",
+            "نبذه عن الاساليب الذكيه"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "خدمة_أخرى",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "لا",
+          "synonyms": [
+            "لأ",
+            "لا أريد",
+            "لا شكرا"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "نعم",
+          "synonyms": [
+            "اي",
+            "ايه",
+            "ايوا",
+            "ايوه",
+            "نعم"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    },
+    "from-sample": true
+  },
+  "dialog_nodes": [
+    {
+      "type": "event_handler",
+      "parent": "مرحبا",
+      "event_name": "focus",
+      "dialog_node": "handler_1_1625242291576"
+    },
+    {
+      "type": "standard",
+      "parent": "node_9_1625266945051",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_6_1625248149599"
+      },
+      "conditions": "@خدمة_أخرى:نعم",
+      "dialog_node": "node_10_1625271371109"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "سعدت بخدمتك"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_9_1625266945051",
+      "conditions": "@خدمة_أخرى:لا",
+      "dialog_node": "node_1_1625271812992",
+      "previous_sibling": "node_10_1625271371109"
+    },
+    {
+      "type": "standard",
+      "parent": "node_2_1625269096625",
+      "next_step": {
+        "behavior": "jump_to",
+        "selector": "body",
+        "dialog_node": "node_6_1625248149599"
+      },
+      "conditions": "@خدمة_أخرى:نعم",
+      "dialog_node": "node_1_1625271925501"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "واجهة للتحكم بذراع واتجاه حركة الروبوت."
+              },
+              {
+                "text": "للتحكم بالذراع; يوجد 6 محركات يحدد لها زاوية ما بين 0-180 درجة لتحريك ذراع الروبوت."
+              },
+              {
+                "text": "للتحكم باتجاه حركة الروبوت; يتم ضغط إحدى هذه الأزرار لتحديد اتجاه الحركة وهي:"
+              },
+              {
+                "text": "Forward: أمام"
+              },
+              {
+                "text": "Backward: خلف"
+              },
+              {
+                "text": "Right: باتجاه اليمين"
+              },
+              {
+                "text": "Left: باتجاه اليسار"
+              },
+              {
+                "text": "Stop: إيقاف الروبوت عن الحركة"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          },
+          {
+            "time": 3,
+            "typing": true,
+            "response_type": "pause"
+          },
+          {
+            "values": [
+              {
+                "text": "هل تريد خدمة أخرى؟"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1625248149599",
+      "conditions": "@خدمات:(شرح مبسط عن لوحة التحكم) && #لوحة_التحكم",
+      "dialog_node": "node_2_1625269096625",
+      "previous_sibling": "node_9_1625266945051"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "سعدت بخدمتك"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_2_1625269096625",
+      "conditions": "@خدمة_أخرى:لا",
+      "dialog_node": "node_4_1625271980962",
+      "previous_sibling": "node_1_1625271925501"
+    },
+    {
+      "type": "standard",
+      "title": "استعلام وخدمات",
+      "output": {
+        "generic": [
+          {
+            "title": "خدماتي هي:",
+            "options": [
+              {
+                "label": "نبذة عن الأساليب الذكية",
+                "value": {
+                  "input": {
+                    "text": "نبذة عن الأساليب الذكية"
+                  }
+                }
+              },
+              {
+                "label": "شرح مبسط عن لوحة التحكم",
+                "value": {
+                  "input": {
+                    "text": "شرح مبسط عن لوحة التحكم"
+                  }
+                }
+              }
+            ],
+            "response_type": "option"
+          }
+        ]
+      },
+      "conditions": "#استعلام && @استعلام",
+      "dialog_node": "node_6_1625248149599",
+      "previous_sibling": "node_7_1625247877682"
+    },
+    {
+      "type": "standard",
+      "title": "ترحيب",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "أهلًا, كيف يمكنني خدمتك؟"
+              },
+              {
+                "text": "أهلًا, اسألني عن خدماتي"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "@ترحيب && #ترحيب",
+      "dialog_node": "node_7_1625247877682",
+      "previous_sibling": "مرحبا"
+    },
+    {
+      "type": "standard",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "الأساليب الذكية هي مؤسسة وطنية سعودية متخصصة في مجال الروبوت والذكاء الصناعي."
+              },
+              {
+                "text": "يمكنك معرفة المزيد عن طريق موقعهم: <a href=\"https://www.s-m.com.sa/index.html \" target=\"blank\">الأساليب الذكية</a>"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "multiline"
+          },
+          {
+            "time": 3,
+            "typing": true,
+            "response_type": "pause"
+          },
+          {
+            "values": [
+              {
+                "text": "هل تريد خدمة أخرى؟"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_6_1625248149599",
+      "conditions": "@خدمات:(نبذة عن الأساليب الذكية) && #الأساليب_الذكية",
+      "dialog_node": "node_9_1625266945051"
+    },
+    {
+      "type": "response_condition",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "مرحبا بك بلوحة التحكم عن بعد الخاصة بروبوتات الأساليب الذكية"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "مرحبا",
+      "dialog_node": "response_9_1625242291634",
+      "previous_sibling": "handler_1_1625242291576"
+    },
+    {
+      "type": "standard",
+      "title": "أي شيء آخر",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "لم أفهم، يمكنك محاولة اعادة الصياغة"
+              },
+              {
+                "text": "هل يمكنك اعادة صياغة عبارتك؟ أنا لا فهم"
+              },
+              {
+                "text": "لم أفهم قصدك"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "random"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "أي شيء آخر",
+      "previous_sibling": "node_6_1625248149599",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "رسالة ترحيب",
+      "metadata": {
+        "_customization": {
+          "mcr": true
+        }
+      },
+      "conditions": "welcome",
+      "dialog_node": "مرحبا"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": ":هل قصدت",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "كل ما سبق خطأ"
+    },
+    "human_agent_assist": {
+      "prompt": ":هل قصدت"
+    }
+  },
+  "learning_opt_out": false,
+  "name": "تحدث",
+  "language": "ar",
+  "description": ""
+}
